@@ -1,0 +1,52 @@
+@import "base/manifest";
+
+body{
+    background: $main-background;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.complete {
+  text-decoration: line-through;
+}
+
+.even {
+  background-color: #3498db;
+}
+
+.list-view {
+  background-color: orange;
+  width: 400px;
+  min-height: 400px;
+  height: auto;
+  max-width: 50%;
+
+  // h1 {
+  //   display: block;
+  // }
+}
+
+ul {
+  list-style: none;
+  margin:0;
+  padding:0
+}
+li {
+  padding: 5px;
+  background:#eee
+}
+
+li.placeholder {background: rgb(255,240,120);}
+li.placeholder:before {
+  content: "Drop here";
+  color: rgb(225,210,90);
+}
+
+input[type="submit"] {
+  background: orange;
+  border: 1px solid #000;
+  height: 50px;
+  width: 150px;
+  display: inline-block;
+  border-radius: 3px;
+}
