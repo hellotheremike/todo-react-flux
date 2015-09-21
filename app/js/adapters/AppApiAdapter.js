@@ -8,7 +8,7 @@ var APIAdapter = function (Store) {
   AppDispatcher.register(function(action) {
     switch(action.actionType) {
       case TodoConstants.TODO_CREATE:
-        RESTController.createTodo().then(function(data){
+        RESTController.createTodo({text: action.text}).then(function(data){
           console.log(data);
         })
         break;

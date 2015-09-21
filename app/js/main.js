@@ -4,10 +4,10 @@ var React = require('react');
 var Store = require('./stores/AppStore');
 var App = require('./components/app.jsx');
 var Store = require('./stores/AppStore');
-var InitiateRestListeners = require('./adapters/AppApiAdapter');
+var InitiateRestAdapter = require('./adapters/AppApiAdapter');
 
 
-new InitiateRestListeners(Store);
+new InitiateRestAdapter(Store);
 
 React.render(
     < App store={Store} />,

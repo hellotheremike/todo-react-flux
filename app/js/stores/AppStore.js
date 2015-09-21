@@ -19,7 +19,6 @@ function create(text) {
 }
 
 function update(id, updates) {
-  console.log(id)
   _todos[id] = assign({}, _todos[id], updates);
 }
 
