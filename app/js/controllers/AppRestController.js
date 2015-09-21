@@ -1,11 +1,13 @@
 var when = require('when');
+var $ = require('jquery');
 
-var RequestTemplate = function(data, url) {
+var RequestTemplate = function(data, url, action) {
   var base_url = "http://localhost/api" + url;
   var deferred = when.defer();
+
   // $.ajax({
-  //     url: base_url + '/todos/new',
-  //     type: 'PUT',
+  //     url: base_url,
+  //     type: action,
   //     data: {
   //         json_data: JSON.stringify(data)
   //     },
@@ -20,7 +22,7 @@ var RequestTemplate = function(data, url) {
 
   setTimeout(function(){
       deferred.resolve(data);
-  }, 1000);
+  }, 10);
 
   return deferred.promise;
 }
@@ -28,27 +30,27 @@ var RequestTemplate = function(data, url) {
 var RestController = {
 
   createTodo: function (data) {
-      return RequestTemplate(data, '/todos/new');
+      return RequestTemplate(data, '/todos/new', 'PUT');
   },
 
   completeAllTodos: function (data) {
-    return RequestTemplate(data, '/todos/complete-all');
+    return RequestTemplate(data, '/todos/complete-all', 'PUT');
   },
 
   undoCompleteTodo: function (data) {
-    return RequestTemplate(data, '/todos/undo/' + data.id);
+    return RequestTemplate(data, '/todos/undo/' + data.id, 'PUT');
   },
 
   completeTodo: function (data) {
-    return RequestTemplate(data, '/todos/complete/' + data.id);
+    return RequestTemplate(data, '/todos/complete/' + data.id, 'PUT');
   },
 
   reorderTodo: function (data) {
-    return RequestTemplate(data, '/todos/complete/' + data.id);
+    return RequestTemplate(data, '/todos/complete/' + data.id, 'PUT');
   },
 
   loadTodos: function (data) {
-    return RequestTemplate(data, '/todos');
+    return RequestTemplate(data, '/todos', 'GET');
   }
 
 };

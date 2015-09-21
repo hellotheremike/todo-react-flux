@@ -32,22 +32,6 @@ function reorder(from, to) {
   _todos.splice(to, 0, _todos.splice(from, 1)[0]);
 }
 
-if (Object.keys(_todos).length < 1) {
-  RESTController.loadTodos().then(function(todos){
-    _todos = [
-      {id: "iesvomxr1", text: "Fix computer",  complete: false},
-      {id: "iesvomxr2", text: "Check emails",  complete: false},
-      {id: "iesvomxr3", text: "Call john",  complete: false},
-      {id: "iesvomxr4", text: "Clean house",  complete: false},
-      {id: "iesvomxr5", text: "Water plants",  complete: false},
-      {id: "iesvomxr6", text: "Read books",  complete: false},
-      {id: "iesvomxr7", text: "Go to the gym",  complete: false}
-    ];
-    _todosLoaded = true;
-    TodoStore.emitChange();
-  });
-}
-
 
 var TodoStore = assign({}, EventEmitter.prototype, {
 
@@ -106,7 +90,8 @@ AppDispatcher.register(function(action) {
       break;
 
     case TodoConstants.TODO_LOAD:
-      _todos = todos;
+      _todos = action.todos;
+      _todosLoaded = true;
       TodoStore.emitChange();
       break;
 

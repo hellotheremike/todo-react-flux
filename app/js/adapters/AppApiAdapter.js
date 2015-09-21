@@ -5,6 +5,20 @@ var Actions = require('../actions/AppActions');
 
 var APIAdapter = function (Store) {
 
+  RESTController.loadTodos().then(function(todos){
+    _todos = [
+      {id: "iesvomxr1", text: "Fix computer",  complete: false},
+      {id: "iesvomxr2", text: "Check emails",  complete: false},
+      {id: "iesvomxr3", text: "Call john",  complete: false},
+      {id: "iesvomxr4", text: "Clean house",  complete: false},
+      {id: "iesvomxr5", text: "Water plants",  complete: false},
+      {id: "iesvomxr6", text: "Read books",  complete: false},
+      {id: "iesvomxr7", text: "Go to the gym",  complete: false}
+    ];
+
+    Actions.loadTodos(_todos);
+  });
+
   AppDispatcher.register(function(action) {
     switch(action.actionType) {
       case TodoConstants.TODO_CREATE:
