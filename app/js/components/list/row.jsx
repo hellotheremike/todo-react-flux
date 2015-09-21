@@ -22,9 +22,7 @@ var Row = React.createClass({
         <div className="todo-text">
           {this.props.todo.text}
         </div>
-        <div className="drag">
-          X
-        </div>
+        <div className="drag"></div>
       </div>
     );
   }

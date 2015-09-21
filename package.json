@@ -16,6 +16,7 @@
     "gulp-rename": "^1.2.2",
     "gulp-sass": "^2.0.4",
     "gulp-util": "^3.0.6",
+    "jquery": "^2.1.4",
     "keymirror": "^0.1.1",
     "object-assign": "^1.0.0",
     "react": "^0.13.3",

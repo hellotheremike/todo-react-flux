@@ -70,7 +70,13 @@
 
     .drag {
       visibility: hidden;
+      display: inline-block;
       float:right;
+      height: em(16);
+      width: 10px;
+      background-image: url("images/drag-handle.png");
+      background-repeat: no-repeat;
+      background-position: center center;
     }
 
     &:hover {
