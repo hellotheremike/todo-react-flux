@@ -22,16 +22,17 @@ var List = React.createClass({
     var position = 0;
     for (var key in allTodos) {
       todos.push(
-        <li data-id={key} key={key} draggable="true"
-        onDragEnd={this.dragEnd}
-        onDragStart={this.dragStart}>
-        <Row todo={allTodos[key]} position={position++}/>
+        <li data-id={key} key={key}
+          draggable="true"
+          onDragEnd={this.dragEnd}
+          onDragStart={this.dragStart}>
+          <Row todo={allTodos[key]} position={position++}/>
       </li>
       );
     }
 
     return (
-      <ul className="list" onDragOver={this.dragOver}>
+      <ul className="todos-list" onDragOver={this.dragOver}>
         {todos}
       </ul>
     );
@@ -48,7 +49,7 @@ var List = React.createClass({
   dragEnd: function(e) {
 
     this.dragged.style.display = "block";
-    this.dragged.parentNode.removeChild(placeholder);
+    // this.dragged.parentNode.removeChild(placeholder);
 
     // Update store
     var from = Number(this.dragged.dataset.id);
@@ -61,8 +62,8 @@ var List = React.createClass({
     e.preventDefault();
     this.dragged.style.display = "none";
     if(e.target.className == "placeholder") return;
-    this.over = e.target;
-    e.target.parentNode.insertBefore(placeholder, e.target);
+    this.over = e.target.parentElement.parentElement;
+    // e.target.parentNode.insertBefore(placeholder, e.target);
 
     var relY = e.clientY - this.over.offsetTop;
     var height = this.over.offsetHeight / 2;
@@ -70,11 +71,11 @@ var List = React.createClass({
 
     if(relY > height) {
       this.nodePlacement = "after";
-      parent.insertBefore(placeholder, e.target.nextElementSibling);
+      // parent.insertBefore(placeholder, e.target.nextElementSibling);
     }
     else if(relY < height) {
       this.nodePlacement = "before"
-      parent.insertBefore(placeholder, e.target);
+      // parent.insertBefore(placeholder, e.target);
     }
   }
 

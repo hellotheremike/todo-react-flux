@@ -27,6 +27,11 @@ gulp.task('copy', function() {
       .pipe(gulp.dest('dist'));
 });
 
+gulp.task('copy-images', function() {
+    gulp.src('app/images/**/*')
+      .pipe(gulp.dest('dist/images'));
+});
+
 gulp.task('styles', function () {
   gulp.src('app/styles/**/*.scss')
     .pipe(plumber())
@@ -35,7 +40,7 @@ gulp.task('styles', function () {
     .pipe(gulp.dest('dist'))
 })
 
-gulp.task('default',['browserify', 'copy', 'styles']);
+gulp.task('default',['browserify', 'copy', 'copy-images', 'styles']);
 
 gulp.task('watch', function() {
     gulp.watch('app/**/*.*', ['default']);

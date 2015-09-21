@@ -16,9 +16,14 @@ var Create = React.createClass({
     var value = this.state.value;
 
     return (
-      <div className="add-todo">
-        <input type="text" valueLink={this.linkState('value')} placeholder="What needs to be done?"/>
-        <a href="#" onClick={this._addTodo}>Add ToDo</a>
+      <div className="todo-add">
+
+        <div className="input-cell">
+          <input type="text" valueLink={this.linkState('value')} placeholder="What needs to be done?"/>
+        </div>
+        <div className="button-cell">
+          <a href="#" onClick={this._addTodo}>Add ToDo</a>
+        </div>
 
       </div>
     );

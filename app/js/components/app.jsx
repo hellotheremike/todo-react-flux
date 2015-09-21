@@ -36,8 +36,10 @@ var App = React.createClass({
     }
 
     return (
-      <div className="list-view">
-          <h1>ToDo's</h1>
+      <div className="default-component-container">
+          <header className="todo-heading">
+            <h1>Todos</h1>
+          </header>
           < Create />
           {list}
           < Footer todos={this.state.allTodos} />

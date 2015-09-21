@@ -14,12 +14,17 @@ var Row = React.createClass({
     var todoComplete = this.props.todo.complete ? "complete" : "";
     var todoMod = this.props.position % 2 ? "odd" : "even";
 
-    var style = [todoComplete, todoMod].join(" ").trim();
+    var style = ["todo-item", todoComplete, todoMod].join(" ").trim();
 
     return (
-      <div className={style}>
+      <div className={style} >
         < Checkbox todo={this.props.todo} position={this.props.position}/>
-        {this.props.todo.text}
+        <div className="todo-text">
+          {this.props.todo.text}
+        </div>
+        <div className="drag">
+          X
+        </div>
       </div>
     );
   }

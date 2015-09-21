@@ -27,10 +27,14 @@ var Footer = React.createClass({
     var itemsLeft = total - completed;
 
     return (
-      <div>
-        Remaning tasks {itemsLeft}
-        <a href="#" onClick={this._markTasksAsComplete}>Mark as done</a>
-      </div>
+      <footer className="todo-footer">
+        <div className="remaning-cell">
+          {itemsLeft} items left
+        </div>
+        <div className="complete-all-cell">
+          <a href="#" onClick={this._markTasksAsComplete}>Mark all as complete</a>
+        </div>
+      </footer>
     );
   },
 

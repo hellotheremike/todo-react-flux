@@ -1,0 +1,21 @@
+/* apply a natural box layout model to all elements, but allowing components to change */
+html {
+  box-sizing: border-box;
+}
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+body {
+  background-color: $main-background;
+  color: $text-color;
+  font-family: $main-font;
+}
+
+.default-component-container {
+  max-width: em(500px);
+  margin: 3em auto;
+  background-color: $component-bg;
+  border: 1px solid $todo-container-border;
+  border-radius: 5px;
+}

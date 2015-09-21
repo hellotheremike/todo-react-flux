@@ -1,0 +1,120 @@
+.todo-heading {
+  text-align: center;
+  padding: em(20);
+  border-bottom: 1px dashed $todo-border;
+}
+
+.todo-add {
+  @include cf;
+  padding: $spacing;
+  vertical-align: middle;
+
+
+  .input-cell {
+    float:left;
+    width: 100%;
+    margin-bottom: em(5);
+
+    input {
+      @include text-input;
+
+      font-size: em(13);
+      height: 40px;
+    }
+  }
+
+  .button-cell {
+    float:left;
+    width: 100%;
+    text-align: center;
+
+    a {
+      @include button;
+
+      width: 100%;
+      height: 40px;
+      display: inline-block;
+    }
+  }
+
+  @media only screen and (min-device-width: $mobile-breakpoint) {
+    .input-cell {
+      width: 68%;
+      padding-right: em(5);
+      margin-bottom: 0;
+    }
+    .button-cell {
+      width: 32%;
+      padding-left: em(5);
+    }
+  }
+
+}
+
+.todos-list {
+  @include reset-list;
+  padding-bottom: em(60);
+
+  li {
+    &.placeholder {
+      background: rgb(255,240,120);
+    }
+
+    &.placeholder:before {
+      content: "Drop here";
+      color: rgb(225,210,90);
+    }
+  }
+  .todo-item {
+    padding: em(14);
+
+    .drag {
+      visibility: hidden;
+      float:right;
+    }
+
+    &:hover {
+      .drag {
+        visibility: visible;
+      }
+    }
+
+    &.complete {
+
+      .todo-text {
+        text-decoration: line-through;
+        color: $text-complete-color;
+      }
+    }
+
+    &.even {
+      background-color: $todo-blue;
+    }
+    input[type="checkbox"] {
+      margin-left: em(10);
+    }
+    .todo-text {
+      display: inline-block;
+      padding-left: em(10);
+      font-size: em(15);
+    }
+  }
+}
+
+.todo-footer {
+  @include cf;
+  padding: $spacing;
+  border-top: 1px dashed $todo-border;
+  font-size: em(13);
+
+  div {
+    width: 50%;
+    float: left;
+  }
+  .remaning-cell {
+    color: $text-complete-color;
+  }
+  .complete-all-cell {
+    text-align: right;
+  }
+}
