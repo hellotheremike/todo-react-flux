@@ -1,36 +1,21 @@
 var React = require( 'react' );
 var ReactPropTypes = React.PropTypes;
+var ForceUpdateMixin = require('../lib/Flux').forceUpdateMixin;
 var Actions = require( '../actions/AppActions' );
 var List = require( './List.React.jsx' );
 var Create = require( './Create.React.jsx' );
 var Footer = require( './Footer.React.jsx' );
 
-
-function getTodoState(store) {
-  return {
-    allTodos: store.getAll(),
-    loaded: store.todosLoaded(),
-  };
-}
-
 var App = React.createClass({
+
+  mixins: [ForceUpdateMixin],
 
   propTypes: {
    store: ReactPropTypes.object.isRequired
   },
 
   getInitialState: function() {
-    return getTodoState(this.props.store);
-  },
-
-  componentDidMount: function() {
-    var Store = this.props.store;
-    Store.addChangeListener(this._onChange);
-  },
-
-  componentWillUnmount: function() {
-    var Store = this.props.store;
-    Store.removeChangeListener(this._onChange);
+    return this._forceUpdate();
   },
 
   render: function(){
@@ -52,8 +37,12 @@ var App = React.createClass({
     );
   },
 
-  _onChange: function() {
-    this.setState(getTodoState(this.props.store));
+  _forceUpdate: function() {
+    var Store = this.props.store;
+    return {
+      allTodos: Store.getAll(),
+      loaded: Store.todosLoaded(),
+    };
   }
 });
 

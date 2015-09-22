@@ -1,9 +1,13 @@
-var when = require('when');
+var When = require('when');
 var $ = require('jquery');
+
+/************************************************
+  AJAX request template
+************************************************/
 
 var RequestTemplate = function(data, url, action) {
   var base_url = "http://localhost/api" + url;
-  var deferred = when.defer();
+  var deferred = When.defer();
 
   // $.ajax({
   //     url: base_url,
@@ -26,6 +30,10 @@ var RequestTemplate = function(data, url, action) {
 
   return deferred.promise;
 }
+
+/************************************************
+  Create controller for REST-endpoints
+************************************************/
 
 var RestController = {
 

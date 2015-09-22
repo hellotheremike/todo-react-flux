@@ -1,13 +1,21 @@
-var AppDispatcher = require('../dispatcher/AppDispatcher');
-var EventEmitter = require('events').EventEmitter;
-var TodoConstants = require('../constants/AppConstants');
-var assign = require('object-assign');
-var RESTController = require('../controllers/AppRestController');
+var Assign = require('object-assign');
+var BuildEvents = require('../lib/Flux').buildEvents;
+var Actions = require('../actions/AppActions');
 
-var CHANGE_EVENT = 'change';
+var events = BuildEvents({
+    storeChanged: [{}]
+}, 'billing.');
 
-var _todos = [];
+/************************************************
+  Store variables
+************************************************/
+
 var _todosLoaded = false;
+var _todos = [];
+
+/************************************************
+  Helper functions for updating store
+************************************************/
 
 function create(text) {
   var id = (+new Date() + Math.floor(Math.random() * 999999)).toString(36);
@@ -19,7 +27,7 @@ function create(text) {
 }
 
 function update(id, updates) {
-  _todos[id] = assign({}, _todos[id], updates);
+  _todos[id] = Assign({}, _todos[id], updates);
 }
 
 function updateAll(updates) {
@@ -33,74 +41,49 @@ function reorder(from, to) {
 }
 
 
-var TodoStore = assign({}, EventEmitter.prototype, {
+/************************************************
+  Eventliseners for Store changes
+************************************************/
 
+Actions.loadTodos.listen(function(todos){
+    _todos = todos;
+    _todosLoaded = true;
+    events.storeChanged();
+});
+
+Actions.create.listen(function(_text){
+  var text = _text.trim();
+  if (text !== '') {
+    create(text);
+    events.storeChanged();
+  }
+});
+
+Actions.toggleComplete.listen(function(index){
+    update(index, {complete: !(_todos[index].complete)});
+    events.storeChanged();
+});
+
+Actions.toggleCompleteAll.listen(function(){
+    updateAll({complete: true});
+    events.storeChanged();
+});
+
+Actions.reorderTodos.listen(function(from, to){
+    reorder(from, to);
+    events.storeChanged();
+});
+
+/************************************************
+  Store functions
+************************************************/
+
+module.exports = {
   todosLoaded: function() {
       return _todosLoaded;
   },
 
   getAll: function() {
     return _todos;
-  },
-
-  emitChange: function() {
-    this.emit(CHANGE_EVENT);
-  },
-
-  addChangeListener: function(callback) {
-    this.on(CHANGE_EVENT, callback);
-  },
-
-  removeChangeListener: function(callback) {
-    this.removeListener(CHANGE_EVENT, callback);
   }
-});
-
-
-AppDispatcher.register(function(action) {
-  var text;
-
-  switch(action.actionType) {
-    case TodoConstants.TODO_CREATE:
-      text = action.text.trim();
-      if (text !== '') {
-        create(text);
-        TodoStore.emitChange();
-      }
-      break;
-
-    case TodoConstants.TODO_COMPLETE_ALL:
-      updateAll({complete: true});
-      TodoStore.emitChange();
-      break;
-
-    case TodoConstants.TODO_UNDO_COMPLETE:
-      update(action.id, {complete: false});
-      TodoStore.emitChange();
-      break;
-
-    case TodoConstants.TODO_COMPLETE:
-      update(action.id, {complete: true});
-      TodoStore.emitChange();
-      break;
-
-    case TodoConstants.TODO_REORDER:
-      reorder(action.from, action.to);
-      TodoStore.emitChange();
-      break;
-
-    case TodoConstants.TODO_LOAD:
-      _todos = action.todos;
-      _todosLoaded = true;
-      TodoStore.emitChange();
-      break;
-
-
-    default:
-      // no op
-  }
-
-});
-
-
-module.exports = TodoStore;
+}

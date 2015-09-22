@@ -1,5 +1,9 @@
 var $ = require('jquery');
 
+/************************************************
+  Mixin for reorderable lists
+************************************************/
+
 module.exports = {
 
   componentDidMount: function() {
