@@ -3,6 +3,7 @@ var gutil = require('gulp-util');
 var browserify = require('gulp-browserify');
 var concat = require('gulp-concat');
 var sass = require('gulp-sass');
+var autoprefixer = require('gulp-autoprefixer');
 var plumber = require('gulp-plumber');
 var rename = require('gulp-rename');
 
@@ -36,6 +37,7 @@ gulp.task('styles', function () {
   gulp.src('app/styles/**/*.scss')
     .pipe(plumber())
     .pipe(sass().on('error', sass.logError))
+    .pipe(autoprefixer())
     .pipe(rename('app.css'))
     .pipe(gulp.dest('dist'))
 })
