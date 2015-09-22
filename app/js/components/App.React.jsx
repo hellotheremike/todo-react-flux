@@ -29,10 +29,10 @@ var App = React.createClass({
   },
 
   render: function(){
-    var list = 'loading todos';
+    var listElement = 'Loading todos';
 
     if(this.state.loaded){
-      list = < List todos={this.state.allTodos} />
+      listElement = < List todos={this.state.allTodos} />
     }
 
     return (
@@ -41,7 +41,7 @@ var App = React.createClass({
             <h1>Todos</h1>
           </header>
           < Create />
-          {list}
+          {listElement}
           < Footer todos={this.state.allTodos} />
       </div>
     );

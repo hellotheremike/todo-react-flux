@@ -13,8 +13,6 @@ var Create = React.createClass({
   },
 
   render: function(){
-    var value = this.state.value;
-
     return (
       <div className="todo-add">
 

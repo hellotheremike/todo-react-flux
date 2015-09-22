@@ -32,13 +32,13 @@ var Footer = React.createClass({
           {itemsLeft} items left
         </div>
         <div className="complete-all-cell">
-          <a href="#" onClick={this._markTasksAsComplete}>Mark all as complete</a>
+          <a href="#" onClick={this._markAllAsComplete}>Mark all as complete</a>
         </div>
       </footer>
     );
   },
 
-  _markTasksAsComplete: function(e){
+  _markAllAsComplete: function(e){
     Actions.toggleCompleteAll();
     e.preventDefault();
   }

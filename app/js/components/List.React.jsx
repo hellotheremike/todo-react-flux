@@ -19,12 +19,12 @@ var List = React.createClass({
 
     return (
       <ul className="todos-list" onDragOver={this.dragOver}>
-        {this.generateListItems()}
+        {this._generateListItems()}
       </ul>
     );
   },
 
-  generateListItems: function() {
+  _generateListItems: function() {
     var allTodos = this.props.todos;
     var listItems = [];
 
