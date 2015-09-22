@@ -39,7 +39,7 @@ var Footer = React.createClass({
   },
 
   _markAllAsComplete: function(e){
-    Actions.toggleCompleteAll();
+    Actions.updateAll();
     e.preventDefault();
   }
 

@@ -42,7 +42,7 @@ var Row = React.createClass({
   },
 
   _handleChange: function(event) {
-    Actions.toggleComplete(this.props.index, this.props.todo);
+    Actions.update(this.props.todo);
   }
 
 });

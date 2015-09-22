@@ -7,18 +7,8 @@ var APIAdapter = function (Store) {
     Initial load of Todos
   ************************************************/
 
-  RESTController.loadTodos().then(function(todos){
-    var todos = [
-      {id: "iesvomxr1", text: "Fix computer",  complete: false},
-      {id: "iesvomxr2", text: "Check emails",  complete: false},
-      {id: "iesvomxr3", text: "Call john",  complete: false},
-      {id: "iesvomxr4", text: "Clean house",  complete: false},
-      {id: "iesvomxr5", text: "Water plants",  complete: false},
-      {id: "iesvomxr6", text: "Read books",  complete: false},
-      {id: "iesvomxr7", text: "Go to the gym",  complete: false}
-    ];
-
-    Actions.loadTodos(todos);
+  RESTController.getAll().then(function(todos){
+    Actions.loadTodos(todos.tasks);
   });
 
 
@@ -26,32 +16,26 @@ var APIAdapter = function (Store) {
     Eventliseners for API-updates
   ************************************************/
 
-  Actions.create.listen(function(_text){
-    RESTController.createTodo({text: _text}).then(function(data){
+  Actions.create.listen(function(text){
+    RESTController.create({text: text}).then(function(data){
       console.log(data);
     })
   });
 
-  Actions.toggleComplete.listen(function(index, object){
-    if( object.complete ) {
-      RESTController.undoCompleteTodo({id: index}).then(function(data){
-        console.log(data);
-      });
-    } else {
-      RESTController.completeTodo({id: index}).then(function(data){
-        console.log(data);
-      });
-    }
+  Actions.update.listen(function(todo){
+    RESTController.update(todo).then(function(data){
+      console.log(data);
+    });
   });
 
-  Actions.toggleCompleteAll.listen(function(){
-    RESTController.completeAllTodos().then(function(data){
+  Actions.updateAll.listen(function(){
+    RESTController.updateAll().then(function(data){
       console.log(data);
     })
   });
 
-  Actions.reorderTodos.listen(function(from, to){
-    RESTController.reorderTodo({from: from, to: to}).then(function(data){
+  Actions.reorder.listen(function(from, to){
+    RESTController.reorder({from: from, to: to}).then(function(data){
       console.log(data);
     });
   });

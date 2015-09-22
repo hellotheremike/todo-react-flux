@@ -18,9 +18,7 @@ var _todos = [];
 ************************************************/
 
 function create(text) {
-  var id = (+new Date() + Math.floor(Math.random() * 999999)).toString(36);
   _todos.push({
-    id: id,
     complete: false,
     text: text
   });
@@ -59,17 +57,17 @@ Actions.create.listen(function(_text){
   }
 });
 
-Actions.toggleComplete.listen(function(index){
-    update(index, {complete: !(_todos[index].complete)});
+Actions.update.listen(function(object){
+    object.complete = !object.complete;
     events.storeChanged();
 });
 
-Actions.toggleCompleteAll.listen(function(){
+Actions.updateAll.listen(function(){
     updateAll({complete: true});
     events.storeChanged();
 });
 
-Actions.reorderTodos.listen(function(from, to){
+Actions.reorder.listen(function(from, to){
     reorder(from, to);
     events.storeChanged();
 });
