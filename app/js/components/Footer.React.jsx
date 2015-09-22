@@ -11,7 +11,7 @@ var Footer = React.createClass({
 
   render: function(){
     var allTodos = this.props.todos;
-    var total = Object.keys(allTodos).length;
+    var total = allTodos.length;
     var completed = 0;
 
     if (total === 0) {

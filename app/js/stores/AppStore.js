@@ -29,10 +29,7 @@ function updateAll(updates) {
 }
 
 function reorder(from, to) {
-  console.log(from, to);
-
   _todos.splice(to, 0, _todos.splice(from, 1)[0]);
-  console.log(_todos);
 }
 
 
@@ -89,7 +86,6 @@ AppDispatcher.register(function(action) {
 
     case TodoConstants.TODO_REORDER:
       reorder(action.from, action.to);
-      console.log(123)
       TodoStore.emitChange();
       break;
 

@@ -46,7 +46,7 @@ var RestController = {
   },
 
   reorderTodo: function (data) {
-    return RequestTemplate(data, '/todos/complete/' + data.id, 'PUT');
+    return RequestTemplate(data, '/todos/reorder', 'PUT');
   },
 
   loadTodos: function (data) {

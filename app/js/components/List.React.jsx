@@ -1,13 +1,12 @@
 var React = require('react');
-var Row = require('./Item.React.jsx');
+var ListItem = require('./ListItem.React.jsx');
 var Actions = require('../actions/AppActions');
+var ReorderListMixin = require('../mixins/ReorderLists');
 var ReactPropTypes = React.PropTypes;
-var $ = require('jquery');
-
-var placeholder = document.createElement("li");
-placeholder.className = "placeholder";
 
 var List = React.createClass({
+
+  mixins: [ReorderListMixin],
 
   propTypes: {
     todos: ReactPropTypes.array.isRequired,
@@ -18,57 +17,32 @@ var List = React.createClass({
       return null;
     }
 
-    var allTodos = this.props.todos;
-    var todos = [];
-    var position = 0;
-
-    for (var key in allTodos) {
-      todos.push(
-        <li data-id={key} key={key}
-          draggable="true"
-          onDragEnd={this.dragEnd}
-          onDragStart={this.dragStart}>
-          <Row todo={allTodos[key]} position={position++}/>
-      </li>
-      );
-    }
-
     return (
       <ul className="todos-list" onDragOver={this.dragOver}>
-        {todos}
+        {this.generateListItems()}
       </ul>
     );
   },
 
-  dragStart: function(e) {
-    this.dragged = $(e.currentTarget);
-    e.dataTransfer.effectAllowed = 'move';
+  generateListItems: function() {
+    var allTodos = this.props.todos;
+    var listItems = [];
 
-    // Firefox requires calling dataTransfer.setData
-    // for the drag to properly work
-    e.dataTransfer.setData("text/html", e.currentTarget);
-  },
-  dragEnd: function(e) {
-    this.dragged.css({display:  "block"});
-    $(".todos-list .placeholder").remove();
-
-    var from = Number(this.dragged.data("id"));
-    var to = Number(this.over.data("id"));
-    if(from < to) to--;
-
-    Actions.reorderTodos(from, to);
-  },
-
-  dragOver: function(e) {
-    e.preventDefault();
-    this.dragged.css({display:  "none"});
-    var target = $(e.target);
-
-    if(target.hasClass("placeholder")) return;
-    if(target.hasClass("todo-item")){
-      this.over = $(e.target.parentNode);
-      $(placeholder).insertBefore( e.target);
+    for (var key in allTodos) {
+      listItems.push(
+        <li data-id={key} key={key}
+          draggable="true"
+          onDragEnd={this.dragEnd}
+          onDragStart={this.dragStart}>
+          <ListItem todo={allTodos[key]} index={key}/>
+      </li>
+      );
     }
+    return listItems;
+  },
+
+  _dragAndDropAction: function(from, to) {
+    Actions.reorderTodos(from, to);
   }
 
 });

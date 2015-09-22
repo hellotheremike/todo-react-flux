@@ -46,7 +46,7 @@ var APIAdapter = function (Store) {
         break;
 
       case TodoConstants.TODO_REORDER:
-        RESTController.completeTodo({from: action.from, to: action.to}).then(function(data){
+        RESTController.reorderTodo({from: action.from, to: action.to}).then(function(data){
           console.log(data);
         });
         break;
