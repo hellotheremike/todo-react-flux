@@ -1,7 +1,8 @@
 var React = require('react');
+var Row = require('./Item.React.jsx');
+var Actions = require('../actions/AppActions');
 var ReactPropTypes = React.PropTypes;
-var Row = require('./row.jsx');
-var Actions = require('../../actions/AppActions');
+var $ = require('jquery');
 
 var placeholder = document.createElement("li");
 placeholder.className = "placeholder";
@@ -9,7 +10,7 @@ placeholder.className = "placeholder";
 var List = React.createClass({
 
   propTypes: {
-    todos: ReactPropTypes.object.isRequired,
+    todos: ReactPropTypes.array.isRequired,
   },
 
   render: function(){
@@ -20,6 +21,7 @@ var List = React.createClass({
     var allTodos = this.props.todos;
     var todos = [];
     var position = 0;
+
     for (var key in allTodos) {
       todos.push(
         <li data-id={key} key={key}
@@ -39,7 +41,7 @@ var List = React.createClass({
   },
 
   dragStart: function(e) {
-    this.dragged = e.currentTarget;
+    this.dragged = $(e.currentTarget);
     e.dataTransfer.effectAllowed = 'move';
 
     // Firefox requires calling dataTransfer.setData
@@ -47,35 +49,25 @@ var List = React.createClass({
     e.dataTransfer.setData("text/html", e.currentTarget);
   },
   dragEnd: function(e) {
+    this.dragged.css({display:  "block"});
+    $(".todos-list .placeholder").remove();
 
-    this.dragged.style.display = "block";
-    // this.dragged.parentNode.removeChild(placeholder);
-
-    // Update store
-    var from = Number(this.dragged.dataset.id);
-    var to = Number(this.over.dataset.id);
+    var from = Number(this.dragged.data("id"));
+    var to = Number(this.over.data("id"));
     if(from < to) to--;
 
     Actions.reorderTodos(from, to);
   },
+
   dragOver: function(e) {
     e.preventDefault();
-    this.dragged.style.display = "none";
-    if(e.target.className == "placeholder") return;
-    this.over = e.target.parentElement.parentElement;
-    // e.target.parentNode.insertBefore(placeholder, e.target);
+    this.dragged.css({display:  "none"});
+    var target = $(e.target);
 
-    var relY = e.clientY - this.over.offsetTop;
-    var height = this.over.offsetHeight / 2;
-    var parent = e.target.parentNode;
-
-    if(relY > height) {
-      this.nodePlacement = "after";
-      // parent.insertBefore(placeholder, e.target.nextElementSibling);
-    }
-    else if(relY < height) {
-      this.nodePlacement = "before"
-      // parent.insertBefore(placeholder, e.target);
+    if(target.hasClass("placeholder")) return;
+    if(target.hasClass("todo-item")){
+      this.over = $(e.target.parentNode);
+      $(placeholder).insertBefore( e.target);
     }
   }
 

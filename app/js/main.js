@@ -2,7 +2,7 @@
 
 var React = require('react');
 var Store = require('./stores/AppStore');
-var App = require('./components/app.jsx');
+var App = require('./components/App.React.jsx');
 var Store = require('./stores/AppStore');
 var InitiateRestAdapter = require('./adapters/AppApiAdapter');
 

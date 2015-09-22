@@ -1,8 +1,8 @@
 var React = require( 'react' );
 var Actions = require( '../actions/AppActions' );
-var List = require( './list/list.jsx' );
-var Create = require( './create.jsx' );
-var Footer = require( './footer.jsx' );
+var List = require( './List.React.jsx' );
+var Create = require( './Create.React.jsx' );
+var Footer = require( './Footer.React.jsx' );
 
 
 function getTodoState(store) {

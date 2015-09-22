@@ -6,7 +6,7 @@ var Actions = require('../actions/AppActions');
 var Footer = React.createClass({
 
   propTypes: {
-   todos: ReactPropTypes.object.isRequired
+   todos: ReactPropTypes.array.isRequired
   },
 
   render: function(){
