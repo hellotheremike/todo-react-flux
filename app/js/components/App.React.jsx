@@ -1,4 +1,5 @@
 var React = require( 'react' );
+var ReactPropTypes = React.PropTypes;
 var Actions = require( '../actions/AppActions' );
 var List = require( './List.React.jsx' );
 var Create = require( './Create.React.jsx' );
@@ -13,6 +14,10 @@ function getTodoState(store) {
 }
 
 var App = React.createClass({
+
+  propTypes: {
+   store: ReactPropTypes.object.isRequired
+  },
 
   getInitialState: function() {
     return getTodoState(this.props.store);
@@ -32,7 +37,7 @@ var App = React.createClass({
     var listElement = 'Loading todos';
 
     if(this.state.loaded){
-      listElement = < List todos={this.state.allTodos} />
+      listElement = < List allTodos={this.state.allTodos} />
     }
 
     return (
@@ -42,10 +47,11 @@ var App = React.createClass({
           </header>
           < Create />
           {listElement}
-          < Footer todos={this.state.allTodos} />
+          < Footer allTodos={this.state.allTodos} />
       </div>
     );
   },
+
   _onChange: function() {
     this.setState(getTodoState(this.props.store));
   }

@@ -6,11 +6,11 @@ var Actions = require('../actions/AppActions');
 var Footer = React.createClass({
 
   propTypes: {
-   todos: ReactPropTypes.array.isRequired
+   allTodos: ReactPropTypes.array.isRequired
   },
 
   render: function(){
-    var allTodos = this.props.todos;
+    var allTodos = this.props.allTodos;
     var total = allTodos.length;
     var completed = 0;
 

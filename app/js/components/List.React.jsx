@@ -1,7 +1,7 @@
 var React = require('react');
 var ListItem = require('./ListItem.React.jsx');
 var Actions = require('../actions/AppActions');
-var ReorderListMixin = require('../mixins/ReorderLists');
+var ReorderListMixin = require('../lib/ReorderListsMixin');
 var ReactPropTypes = React.PropTypes;
 
 var List = React.createClass({
@@ -9,11 +9,11 @@ var List = React.createClass({
   mixins: [ReorderListMixin],
 
   propTypes: {
-    todos: ReactPropTypes.array.isRequired,
+    allTodos: ReactPropTypes.array.isRequired,
   },
 
   render: function(){
-    if (Object.keys(this.props.todos).length < 1) {
+    if (Object.keys(this.props.allTodos).length < 1) {
       return null;
     }
 
@@ -25,7 +25,7 @@ var List = React.createClass({
   },
 
   _generateListItems: function() {
-    var allTodos = this.props.todos;
+    var allTodos = this.props.allTodos;
     var listItems = [];
 
     for (var key in allTodos) {
