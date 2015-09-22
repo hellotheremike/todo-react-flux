@@ -1,8 +1,16 @@
+/********************************************************
+ App Header
+*********************************************************/
+
 .todo-heading {
   text-align: center;
   padding: em(20);
   border-bottom: 1px dashed $todo-border;
 }
+
+/********************************************************
+ REACT Add component
+*********************************************************/
 
 .todo-add {
   @include cf;
@@ -38,18 +46,23 @@
   }
 
   @media only screen and (min-device-width: $mobile-breakpoint) {
+
     .input-cell {
       width: 68%;
       padding-right: em(5);
       margin-bottom: 0;
     }
+
     .button-cell {
       width: 32%;
       padding-left: em(5);
     }
   }
-
 }
+
+/********************************************************
+ REACT List component
+*********************************************************/
 
 .todos-list {
   @include reset-list;
@@ -96,19 +109,26 @@
     &.even {
       background-color: $todo-blue;
     }
+
     input[type="checkbox"] {
       margin-left: em(10);
     }
+
     .todo-text {
-      display: inline-block;
       padding-left: em(10);
       font-size: em(15);
+      display: inline-block;
     }
   }
 }
 
+/********************************************************
+ REACT Footer component
+*********************************************************/
+
 .todo-footer {
   @include cf;
+
   padding: $spacing;
   border-top: 1px dashed $todo-border;
   font-size: em(13);
@@ -116,11 +136,13 @@
   div {
     width: 50%;
     float: left;
-  }
-  .remaning-cell {
-    color: $text-complete-color;
-  }
-  .complete-all-cell {
-    text-align: right;
+
+    &.remaning-cell {
+      color: $text-complete-color;
+    }
+
+    &.complete-all-cell {
+      text-align: right;
+    }
   }
 }

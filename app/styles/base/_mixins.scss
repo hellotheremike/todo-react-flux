@@ -25,7 +25,7 @@
   padding: em(13);
   border-radius: 5px;
   border: 1px solid $input-border-color;
-  background: linear-gradient(to top, #d6d5d3 0%,#dfdedd 50%,#eae9e8 52%,#ebeae9 100%); /* W3C */
+  background: linear-gradient(to top, #d6d5d3 0%,#dfdedd 50%,#eae9e8 52%,#ebeae9 100%);
 }
 
 @mixin text-input {

@@ -1,4 +1,7 @@
-//Px to Em coverter.
+/********************************************************
+ PX to EM converter
+*********************************************************/
+
 $browser-context: 16;
 
 @function em($pixels, $context: $browser-context) {

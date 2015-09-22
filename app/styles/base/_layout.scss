@@ -1,7 +1,12 @@
-/* apply a natural box layout model to all elements, but allowing components to change */
+/********************************************************
+ App Header
+ * { Box-sizing: Border-box } FTW - Paul Irish
+*********************************************************/
+
 html {
   box-sizing: border-box;
 }
+
 *, *:before, *:after {
   box-sizing: inherit;
 }
