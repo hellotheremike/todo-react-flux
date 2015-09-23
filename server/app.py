@@ -20,6 +20,18 @@ tasks = [
         'text': u'Learn Python',
         'complete': False
     }
+    ,
+    {
+        'id': 3,
+        'text': u'Eat bananas',
+        'complete': False
+    }
+    ,
+    {
+        'id': 3,
+        'text': u'Kill sebastian',
+        'complete': False
+    }
 ]
 
 task_fields = {
@@ -27,7 +39,6 @@ task_fields = {
     'complete': fields.Boolean,
     'uri': fields.Url('task')
 }
-
 
 class TaskListAPI(Resource):
     def __init__(self):
@@ -93,16 +104,21 @@ class TaskListReorderAPI(Resource):
 
     def put(self):
         args = request.get_json(force=True)
-        a, b = args['from'], args['to']
-
-        tasks[b], tasks[a] = tasks[a], tasks[b]
+        tasks.insert(args['to'], tasks.pop(args['from']))
         return args
-
 
 api.add_resource(TaskListAPI, '/todo/api/v1.0/tasks', endpoint='tasks')
 api.add_resource(TaskAPI, '/todo/api/v1.0/tasks/<int:id>', endpoint='task')
 api.add_resource(TaskListReorderAPI, '/todo/api/v1.0/reorder', endpoint='reorder')
 
+# Routes
+@app.route('/')
+def root():
+    return app.send_static_file('index.html')
+
+@app.route('/<path:path>')
+def static_proxy(path):
+    return app.send_static_file(path)
 
 if __name__ == '__main__':
     app.run(debug=True)

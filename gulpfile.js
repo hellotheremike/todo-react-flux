@@ -20,17 +20,17 @@ gulp.task('browserify', function() {
       })
       .pipe(concat('main.js'))
       .pipe(rename('app.js'))
-      .pipe(gulp.dest('dist'));
+      .pipe(gulp.dest('server/static'));
 });
 
 gulp.task('copy', function() {
     gulp.src('app/index.html')
-      .pipe(gulp.dest('dist'));
+      .pipe(gulp.dest('server/static'));
 });
 
 gulp.task('copy-images', function() {
     gulp.src('app/images/**/*')
-      .pipe(gulp.dest('dist/images'));
+      .pipe(gulp.dest('server/static/images'));
 });
 
 gulp.task('styles', function () {
@@ -39,7 +39,7 @@ gulp.task('styles', function () {
     .pipe(sass().on('error', sass.logError))
     .pipe(autoprefixer())
     .pipe(rename('app.css'))
-    .pipe(gulp.dest('dist'))
+    .pipe(gulp.dest('server/static'))
 })
 
 gulp.task('default',['browserify', 'copy', 'copy-images', 'styles']);
