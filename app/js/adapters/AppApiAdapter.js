@@ -16,9 +16,9 @@ var APIAdapter = function (Store) {
     Eventliseners for API-updates
   ************************************************/
 
-  Actions.create.listen(function(text){
-    RESTController.create({text: text}).then(function(data){
-      console.log(data);
+  Actions.create.listen(function(todo){
+    RESTController.create({text: todo.text}).then(function(data){
+      Actions.updateLocally(todo, data.task);
     })
   });
 

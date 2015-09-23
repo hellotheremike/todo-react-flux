@@ -6,7 +6,7 @@ var $ = require('jquery');
 ************************************************/
 
 var RequestTemplate = function(data, url, action) {
-  var base_url = "http://localhost:5000" + url;
+  var base_url = url;
   var deferred = When.defer();
 
   $.ajax({
@@ -35,7 +35,7 @@ var TodoRestController = {
   create: function (data) {
     return RequestTemplate(data, '/todo/api/v1.0/tasks', 'POST');
   },
-  
+
   update: function (data) {
     return RequestTemplate(data, data.uri, 'PUT');
   },

@@ -6,8 +6,9 @@ var BuildActions = require('../lib/Flux').buildActions;
 
 module.exports = BuildActions({
     loadTodos: [/* load new todos */ Array],
-    create: [/* todo text */ String ],
-    update: [/* todo text */ Object ],
+    create: [/* new todo object */ Object ],
+    update: [/* todo object */ Object ],
+    updateLocally: [/* local todo */ Object, /* server response todo */ Object ],
     updateAll: [],
     reorder: [/* from */ Number, /* to */ Number]
 }, 'todo.');

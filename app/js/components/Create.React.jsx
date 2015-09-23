@@ -29,7 +29,7 @@ var Create = React.createClass({
 
   _addTodo: function(e){
     if (this.state.value.trim()){
-      Actions.create(this.state.value);
+      Actions.create({text: this.state.value, complete: false});
       this.setState({value: ""});
     }
 
