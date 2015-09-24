@@ -12,7 +12,7 @@ var RequestTemplate = function(data, url, action) {
   $.ajax({
       url: base_url,
       type: action,
-      contentType: 'application/json',
+      contentType: 'application/json; charset=utf-8',
       dataType: 'json',
       data: JSON.stringify(data),
       success: function (result) {

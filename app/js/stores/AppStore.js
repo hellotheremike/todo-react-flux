@@ -46,7 +46,9 @@ function reorder(from, to) {
 ************************************************/
 
 Actions.loadTodos.listen(function(todos){
-    _todos = todos;
+    if(todos && todos.length) {
+      _todos = todos;
+    }
     _todosLoaded = true;
     events.storeChanged();
 });

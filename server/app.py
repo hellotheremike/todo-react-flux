@@ -28,13 +28,14 @@ tasks = [
     }
     ,
     {
-        'id': 3,
+        'id': 4,
         'text': u'Kill sebastian',
         'complete': False
     }
 ]
 
 task_fields = {
+    'id': fields.Integer,
     'text': fields.String,
     'complete': fields.Boolean,
     'uri': fields.Url('task')
@@ -43,9 +44,9 @@ task_fields = {
 class TaskListAPI(Resource):
     def __init__(self):
         self.reqparse = reqparse.RequestParser()
-        # self.reqparse.add_argument('text', type=str, required=True,
-        #                            help='No task text provided',
-        #                            location='json')
+        self.reqparse.add_argument('text', type=str, required=True,
+                                   help='No task text provided',
+                                   location='json')
         super(TaskListAPI, self).__init__()
 
     def get(self):
@@ -53,28 +54,20 @@ class TaskListAPI(Resource):
 
     def post(self):
         args = self.reqparse.parse_args()
-        json_data = request.get_json(force=True)
         task = {
-            'id': tasks[-1]['id'] + 1,
-            'text': json_data['text'],
+            'id': len(tasks) + 1,
+            'text': args['text'],
             'complete': False
         }
         tasks.append(task)
         return {'task': marshal(task, task_fields)}, 201
 
-    def put(self):
-        for k in tasks:
-            k['complete'] = True
-
-        return {'task': True}
-
-
 
 class TaskAPI(Resource):
     def __init__(self):
         self.reqparse = reqparse.RequestParser()
-        # self.reqparse.add_argument('text', type=str, location='json')
-        # self.reqparse.add_argument('complete', type=bool, location='json')
+        self.reqparse.add_argument('text', type=str, location='json', required=True)
+        self.reqparse.add_argument('complete', type=bool, location='json', required=True)
         super(TaskAPI, self).__init__()
 
     def get(self, id):
@@ -88,8 +81,7 @@ class TaskAPI(Resource):
         if len(task) == 0:
             abort(404)
         task = task[0]
-        # args = self.reqparse.parse_args()
-        args = request.get_json(force=True)
+        args = self.reqparse.parse_args()
         for k, v in args.items():
             if v is not None:
                 task[k] = v
@@ -98,18 +90,42 @@ class TaskAPI(Resource):
 class TaskListReorderAPI(Resource):
     def __init__(self):
         self.reqparse = reqparse.RequestParser()
-        # self.reqparse.add_argument('text', type=str, location='json')
-        # self.reqparse.add_argument('complete', type=bool, location='json')
+        self.reqparse.add_argument('to', type=int, location='json', required=True)
+        self.reqparse.add_argument('from', type=int, location='json', required=True)
         super(TaskListReorderAPI, self).__init__()
 
     def put(self):
-        args = request.get_json(force=True)
+        args = self.reqparse.parse_args()
+        tasks_length = len(tasks)-1
+        task_current = [task for task in tasks if task['id'] == args['from'] + 1]
+        task_destination = [task for task in tasks if task['id'] == args['to'] + 1]
+
+        if len(task_current) == 0 or len(task_destination) == 0:
+            abort(500)
+
         tasks.insert(args['to'], tasks.pop(args['from']))
-        return args
+        return args, 201
+
+class TaskListUpdateAllAPI(Resource):
+    def __init__(self):
+        self.reqparse = reqparse.RequestParser()
+        self.reqparse.add_argument('complete', type=bool, location='json')
+        self.reqparse.add_argument('text', type=str, location='json')
+        super(TaskListUpdateAllAPI, self).__init__()
+
+    def put(self):
+        args = self.reqparse.parse_args()
+        for a in tasks:
+            for k, v in args.items():
+                if v is not None:
+                    a[k] = v
+
+        return {'tasks': [marshal(task, task_fields) for task in tasks]}
 
 api.add_resource(TaskListAPI, '/todo/api/v1.0/tasks', endpoint='tasks')
 api.add_resource(TaskAPI, '/todo/api/v1.0/tasks/<int:id>', endpoint='task')
-api.add_resource(TaskListReorderAPI, '/todo/api/v1.0/reorder', endpoint='reorder')
+api.add_resource(TaskListReorderAPI, '/todo/api/v1.0/tasks/reorder', endpoint='reorder')
+api.add_resource(TaskListUpdateAllAPI, '/todo/api/v1.0/tasks/update-all', endpoint='completeall')
 
 # Routes
 @app.route('/')
