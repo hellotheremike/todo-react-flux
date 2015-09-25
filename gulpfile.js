@@ -1,5 +1,9 @@
 var gulp = require('gulp');
 var gutil = require('gulp-util');
+var argv = require('yargs').argv;
+var gulpif = require('gulp-if')
+var minifyCss = require('gulp-minify-css');
+var uglify = require('gulp-uglify');
 var browserify = require('gulp-browserify');
 var concat = require('gulp-concat');
 var sass = require('gulp-sass');
@@ -19,6 +23,7 @@ gulp.task('browserify', function() {
         gutil.log(err.message)
       })
       .pipe(concat('main.js'))
+      .pipe(gulpif(argv.production, uglify()))
       .pipe(rename('app.js'))
       .pipe(gulp.dest('server/static'));
 });
@@ -38,6 +43,7 @@ gulp.task('styles', function () {
     .pipe(plumber())
     .pipe(sass().on('error', sass.logError))
     .pipe(autoprefixer())
+    .pipe(gulpif(argv.production, minifyCss()))
     .pipe(rename('app.css'))
     .pipe(gulp.dest('server/static'))
 })
