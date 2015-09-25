@@ -41,7 +41,7 @@ var TodoRestController = {
   },
 
   updateAll: function (data) {
-    return RequestTemplate(data, '/todo/api/v1.0/tasks', 'PUT');
+    return RequestTemplate(data, '/todo/api/v1.0/tasks/update-all', 'PUT');
   },
 
   getAll: function (data) {
@@ -49,7 +49,7 @@ var TodoRestController = {
   },
 
   reorder: function (data) {
-    return RequestTemplate(data, '/todo/api/v1.0/reorder', 'PUT');
+    return RequestTemplate(data, '/todo/api/v1.0/tasks/reorder', 'PUT');
   }
 
 };

@@ -36,7 +36,7 @@ var Footer = React.createClass({
         <div className="complete-all-cell">
           <a href="#" onClick={this._markAllAsComplete}>Mark all as complete</a>
         </div>
-        
+
       </footer>
     );
   },

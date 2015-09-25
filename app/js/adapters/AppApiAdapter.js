@@ -29,7 +29,7 @@ var APIAdapter = function (Store) {
   });
 
   Actions.updateAll.listen(function(){
-    RESTController.updateAll().then(function(data){
+    RESTController.updateAll({complete: true}).then(function(data){
       console.log(data);
     })
   });
