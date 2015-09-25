@@ -3,9 +3,9 @@ var TestUtils = React.addons.TestUtils;
 var ListItemComponent = require('../ListItem.React.jsx');
 
 jest.dontMock('../ListItem.React.jsx');
-jest.dontMock('../../actions/AppActions');
+// jest.dontMock('../../actions/AppActions');
 
-var Actions = require('../../actions/AppActions');
+var Actions;
 describe('ListItem.React', function() {
   beforeEach(function() {
 
@@ -18,8 +18,8 @@ describe('ListItem.React', function() {
 
     // Jest will mock the functions on this module automatically for us.
     //
+    Actions = require('../../actions/AppActions');
 
-    Actions.update = jest.genMockFunction();
   });
 
 
@@ -29,7 +29,7 @@ describe('ListItem.React', function() {
     var TestUtils = React.addons.TestUtils;
 
     var todo = {text: "test", complete: false}
-
+    Actions.update = jest.genMockFunction();
     // Render a checkbox with label in the document
     var Item = TestUtils.renderIntoDocument(
       <ListItem todo={todo} index="1" />
