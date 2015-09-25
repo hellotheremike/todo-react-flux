@@ -2,18 +2,33 @@
  Genareal variables
 *********************************************************/
 
-$main-background: #f6f5f5;
-$spacing: em(20);
+$browser-context: 16; // For pixel to em-convertion
 
-$link-color: #448ccb;
-$text-color: #333333;
-$text-complete-color: #999999;
-$button-text-color: #454545;
-$mobile-breakpoint:420px;
+// Breakpoints
+$mobile-breakpoint: 420px;
 
+// Colors
+$todo-white: #ffffff;
 $todo-blue: #f4f7fa;
 $todo-border: #dadada;
 $todo-container-border: #ececec;
-$todo-mark-complete: #448ccb;
-$component-bg: #ffffff;
+$todo-complete-color: #999999;
+
+$link-color: #448ccb;
+$text-color: #333333;
+
+$main-background: #f6f5f5;
+$component-background: $todo-white;
+
 $input-border-color: #b6b6b6;
+$button-text-color: #454545;
+
+// Other
+$small-spacing: em(5);
+$medium-spacing: em(10);
+$large-spacing: em(20);
+
+$small-text-size: em(13);
+$medium-text-size: em(16);
+
+$main-border-radius: 5px;

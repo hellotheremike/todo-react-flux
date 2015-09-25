@@ -35,14 +35,14 @@ var List = React.createClass({
           onDragEnd={this.dragEnd}
           onDragStart={this.dragStart}>
           <ListItem todo={allTodos[key]} index={key}/>
-      </li>
+        </li>
       );
     }
     return listItems;
   },
 
   _dragAndDropAction: function(from, to) {
-    Actions.reorderTodos(from, to);
+    Actions.reorder(from, to);
   }
 
 });

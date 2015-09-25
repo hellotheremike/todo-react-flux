@@ -7,7 +7,7 @@ This is my first React App that implements React on top of the Flux architecture
     git clone git@github.com:hellotheremike/todo-react-flux.git
     cd todo-react-flux
     npm install
-    gulp
+    gulp --production
 
 ## Usage
 

@@ -13,12 +13,11 @@ var Row = React.createClass({
   render: function(){
     var isComplete = this.props.todo.complete ? "complete" : "";
     var isOddEven = this.props.index % 2 ? "odd" : "even";
+    var elementStyle = ["todo-item", isComplete, isOddEven].join(" ").trim();
 
     var checkboxId = ["c", this.props.index ].join("");
-    var elementStyle = ["todo-item", isComplete, isOddEven].join(" ").trim();
     var isChecked = this.props.todo.complete;
     var itemText = this.props.todo.text;
-
 
     return (
       <div className={elementStyle} >
@@ -30,9 +29,9 @@ var Row = React.createClass({
           onChange={this._handleChange}
         />
 
-      <label htmlFor={checkboxId}>
-          <span></span>
-          {itemText}
+        <label htmlFor={checkboxId}>
+          <span className="checkbox"></span>
+          <span className="todo-text">{itemText}</span>
         </label>
 
         <div className="drag"></div>
@@ -42,7 +41,7 @@ var Row = React.createClass({
   },
 
   _handleChange: function(event) {
-    Actions.toggleComplete(this.props.index, this.props.todo);
+    Actions.update(this.props.todo);
   }
 
 });

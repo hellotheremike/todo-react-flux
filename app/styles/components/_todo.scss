@@ -1,5 +1,5 @@
 /********************************************************
- App Header
+ Todo.App Header
 *********************************************************/
 
 .todo-heading {
@@ -8,26 +8,25 @@
   border-bottom: 1px dashed $todo-border;
 }
 
+
 /********************************************************
- REACT Add component
+ Todo.REACT Add component
 *********************************************************/
 
-.todo-add {
+.todo-create {
   @include cf;
-  padding: $spacing;
-  vertical-align: middle;
 
+  padding: $large-spacing;
+  vertical-align: middle;
 
   .input-cell {
     float:left;
     width: 100%;
-    margin-bottom: em(5);
+    margin-bottom: $small-spacing;
 
     input {
       @include text-input;
-
-      font-size: em(13);
-      height: 40px;
+      height: em(50);
     }
   }
 
@@ -40,7 +39,7 @@
       @include button;
 
       width: 100%;
-      height: 40px;
+      height: em(50);
       display: inline-block;
     }
   }
@@ -49,19 +48,20 @@
 
     .input-cell {
       width: 68%;
-      padding-right: em(5);
+      padding-right: $small-spacing;
       margin-bottom: 0;
     }
 
     .button-cell {
       width: 32%;
-      padding-left: em(5);
+      padding-left: $small-spacing;
     }
   }
 }
 
+
 /********************************************************
- REACT List component
+ Todo.REACT List component
 *********************************************************/
 
 .todos-list {
@@ -70,23 +70,35 @@
 
   li {
     &.placeholder {
-      background: rgb(255,240,120);
+      background: darken($todo-blue, 30%);
     }
 
     &.placeholder:before {
       content: "Drop here";
-      color: rgb(225,210,90);
+      color: $todo-white;
     }
   }
+
+
+  /********************************************************
+   Todo.REACT ListItem component
+  *********************************************************/
+
   .todo-item {
-    padding: em(14);
+    padding: em(15);
+
+    .todo-text {
+      padding-left: $medium-spacing;
+      font-size: $medium-text-size;
+      display: inline-block;
+    }
 
     .drag {
+      height: em(22);
+      width: $medium-spacing;
       visibility: hidden;
       display: inline-block;
       float:right;
-      height: em(22);
-      width: 10px;
       background-image: url("images/drag-handle.png");
       background-repeat: no-repeat;
       background-position: center center;
@@ -102,7 +114,7 @@
 
       .todo-text {
         text-decoration: line-through;
-        color: $text-complete-color;
+        color: $todo-complete-color;
       }
     }
 
@@ -111,34 +123,44 @@
     }
 
     input[type="checkbox"] {
-      margin-left: em(10);
+        margin-left: $medium-spacing;
+        display: none;
     }
 
-    .todo-text {
-      padding-left: em(10);
-      font-size: em(15);
-      display: inline-block;
+    input[type="checkbox"] + label .checkbox {
+        display:inline-block;
+        width: em(22);
+        height: em(22);
+        margin: -1px 4px 0 0;
+        vertical-align: middle;
+        background: url(images/unchecked.png) center center no-repeat;
+        cursor: pointer;
+    }
+
+    input[type="checkbox"]:checked + label .checkbox {
+        background: url(images/checked.png) center center no-repeat;
     }
   }
 }
 
+
 /********************************************************
- REACT Footer component
+ Todo.REACT Footer component
 *********************************************************/
 
 .todo-footer {
   @include cf;
 
-  padding: $spacing;
+  padding: $large-spacing;
   border-top: 1px dashed $todo-border;
-  font-size: em(13);
+  font-size: $small-text-size;
 
   div {
     width: 50%;
     float: left;
 
     &.remaning-cell {
-      color: $text-complete-color;
+      color: $todo-complete-color;
     }
 
     &.complete-all-cell {

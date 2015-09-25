@@ -28,18 +28,21 @@ var Footer = React.createClass({
 
     return (
       <footer className="todo-footer">
+
         <div className="remaning-cell">
           {itemsLeft} items left
         </div>
+
         <div className="complete-all-cell">
           <a href="#" onClick={this._markAllAsComplete}>Mark all as complete</a>
         </div>
+        
       </footer>
     );
   },
 
   _markAllAsComplete: function(e){
-    Actions.toggleCompleteAll();
+    Actions.updateAll();
     e.preventDefault();
   }
 
