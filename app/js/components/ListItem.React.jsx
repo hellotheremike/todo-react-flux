@@ -32,7 +32,8 @@ var Row = React.createClass({
 
       <label htmlFor={checkboxId}>
           <span></span>
-          {itemText}
+          <span className="todo-text">{itemText}</span>
+
         </label>
 
         <div className="drag"></div>
