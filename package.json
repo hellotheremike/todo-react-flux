@@ -6,7 +6,20 @@
   "repository": "https://github.com/hellotheremike/hellotheremike/todo-react-flux",
   "readme": "https://github.com/hellotheremike/hellotheremike/todo-react-flux/README.md",
   "license": "Apache 2",
+  "scripts": {
+    "test": "jest"
+  },
+  "engines": {
+    "iojs": ">= 3.3.1"
+  },
+  "jest": {
+    "scriptPreprocessor": "<rootDir>/node_modules/babel-jest",
+    "unmockedModulePathPatterns": [
+      "<rootDir>/node_modules/react"
+    ]
+  },
   "devDependencies": {
+    "babel-jest": "^5.3.0",
     "es6-promise": "^1.0.0",
     "fluqs": "^1.0.2",
     "gulp": "^3.8.11",
@@ -20,6 +33,7 @@
     "gulp-sass": "^2.0.4",
     "gulp-uglify": "^1.4.1",
     "gulp-util": "^3.0.6",
+    "jest-cli": "^0.5.8",
     "jquery": "^2.1.4",
     "object-assign": "^1.0.0",
     "react": "^0.13.3",
