@@ -14,11 +14,12 @@ var Create = React.createClass({
 
   render: function(){
     return (
-      <div className="todo-add">
+      <div className="todo-create">
 
         <div className="input-cell">
           <input type="text" valueLink={this.linkState('value')} placeholder="What needs to be done?"/>
         </div>
+        
         <div className="button-cell">
           <a href="#" onClick={this._addTodo}>Add ToDo</a>
         </div>

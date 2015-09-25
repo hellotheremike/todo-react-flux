@@ -8,7 +8,6 @@ $browser-context: 16; // For pixel to em-convertion
 $mobile-breakpoint: 420px;
 
 // Colors
-
 $todo-white: #ffffff;
 $todo-blue: #f4f7fa;
 $todo-border: #dadada;
@@ -25,6 +24,11 @@ $input-border-color: #b6b6b6;
 $button-text-color: #454545;
 
 // Other
-$small-spacing: em(10);
+$small-spacing: em(5);
 $medium-spacing: em(10);
 $large-spacing: em(20);
+
+$small-text-size: em(13);
+$medium-text-size: em(16);
+
+$main-border-radius: 5px;

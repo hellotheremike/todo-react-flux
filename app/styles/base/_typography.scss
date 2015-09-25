@@ -6,8 +6,8 @@
 $main-font: "Open Sans", "Arial", "Sans-serif";
 
 a {
-  text-decoration: none;
   color: $link-color;
+  text-decoration: none;
 
   &:hover {
     color: lighten($link-color, 20%);

@@ -19,18 +19,19 @@
 }
 
 @mixin button {
-  padding: em(13);
+  padding: em(12);
   background: linear-gradient(to top, #d6d5d3 0%, #dfdedd 50%, #eae9e8 52%, #ebeae9 100%);
   color: $button-text-color;
-  font-weight: bold;
-  font-size: em(13);
-  border-radius: 5px;
+  font-weight: 700;
+  font-size: $small-text-size;
+  border-radius: $main-border-radius;
   border: 1px solid $input-border-color;
 }
 
 @mixin text-input {
   width: 100%;
-  padding: em(10);
-  border-radius: 5px;
+  padding: $large-spacing;
+  border-radius: $main-border-radius;
   border: 1px solid $input-border-color;
+  font-size: $small-text-size;
 }

@@ -8,15 +8,16 @@
   border-bottom: 1px dashed $todo-border;
 }
 
+
 /********************************************************
  Todo.REACT Add component
 *********************************************************/
 
-.todo-add {
+.todo-create {
   @include cf;
+
   padding: $large-spacing;
   vertical-align: middle;
-
 
   .input-cell {
     float:left;
@@ -25,9 +26,7 @@
 
     input {
       @include text-input;
-
-      font-size: em(13);
-      height: 40px;
+      height: em(50);
     }
   }
 
@@ -40,7 +39,7 @@
       @include button;
 
       width: 100%;
-      height: 40px;
+      height: em(50);
       display: inline-block;
     }
   }
@@ -59,6 +58,7 @@
     }
   }
 }
+
 
 /********************************************************
  Todo.REACT List component
@@ -79,15 +79,26 @@
     }
   }
 
+
+  /********************************************************
+   Todo.REACT ListItem component
+  *********************************************************/
+
   .todo-item {
-    padding: em(14);
+    padding: em(15);
+
+    .todo-text {
+      padding-left: $medium-spacing;
+      font-size: $medium-text-size;
+      display: inline-block;
+    }
 
     .drag {
+      height: em(22);
+      width: $medium-spacing;
       visibility: hidden;
       display: inline-block;
       float:right;
-      height: em(22);
-      width: $medium-spacing;
       background-image: url("images/drag-handle.png");
       background-repeat: no-repeat;
       background-position: center center;
@@ -113,31 +124,25 @@
 
     input[type="checkbox"] {
         margin-left: $medium-spacing;
-        display:none;
+        display: none;
     }
 
-    input[type="checkbox"] + label span:first-of-type {
+    input[type="checkbox"] + label .checkbox {
         display:inline-block;
-        width:em(22);
-        height:em(22);
-        margin:-1px 4px 0 0;
-        vertical-align:middle;
-        background:url(images/unchecked.png) center center no-repeat;
-        cursor:pointer;
+        width: em(22);
+        height: em(22);
+        margin: -1px 4px 0 0;
+        vertical-align: middle;
+        background: url(images/unchecked.png) center center no-repeat;
+        cursor: pointer;
     }
 
-    input[type="checkbox"]:checked + label span:first-of-type {
-        background:url(images/checked.png) center center no-repeat;
-    }
-
-
-    .todo-text {
-      padding-left: $medium-spacing;
-      font-size: em(15);
-      display: inline-block;
+    input[type="checkbox"]:checked + label .checkbox {
+        background: url(images/checked.png) center center no-repeat;
     }
   }
 }
+
 
 /********************************************************
  Todo.REACT Footer component
@@ -148,7 +153,7 @@
 
   padding: $large-spacing;
   border-top: 1px dashed $todo-border;
-  font-size: em(13);
+  font-size: $small-text-size;
 
   div {
     width: 50%;
