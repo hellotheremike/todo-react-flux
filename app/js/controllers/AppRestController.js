@@ -6,7 +6,7 @@ var $ = require('jquery');
 ************************************************/
 
 var RequestTemplate = function(data, url, action) {
-  var base_url = url;
+  var base_url = url + "?api_key=" + window.api_key;
   var deferred = When.defer();
 
   $.ajax({
