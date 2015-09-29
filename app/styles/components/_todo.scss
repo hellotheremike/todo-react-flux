@@ -63,6 +63,13 @@
 /********************************************************
  Todo.REACT List component
 *********************************************************/
+.alert-box {
+  text-align: center;
+
+  &.error {
+    color: $todo-red;
+  }
+}
 
 .todos-list {
   @include reset-list;

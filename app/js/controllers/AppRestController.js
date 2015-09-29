@@ -19,7 +19,7 @@ var RequestTemplate = function(data, url, action) {
           deferred.resolve(result);
       },
       error: function (error) {
-          deferred.reject({error: error.responseText});
+        deferred.reject({error: error.responseText});
       }
   });
 
@@ -41,7 +41,7 @@ var TodoRestController = {
   },
 
   updateAll: function (data) {
-    return RequestTemplate(data, '/todo/api/v1.0/tasks/update-all', 'PUT');
+    return RequestTemplate(data, '/todo/api/v1.0/tasks', 'PUT');
   },
 
   getAll: function (data) {

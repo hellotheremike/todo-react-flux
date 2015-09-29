@@ -30,7 +30,7 @@ gulp.task('browserify', function() {
 
 gulp.task('copy', function() {
     gulp.src('app/index.html')
-      .pipe(gulp.dest('server/static'));
+      .pipe(gulp.dest('server/templates'));
 });
 
 gulp.task('copy-images', function() {

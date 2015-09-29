@@ -9,6 +9,8 @@ var APIAdapter = function (Store) {
 
   RESTController.getAll().then(function(todos){
     Actions.loadTodos(todos.tasks);
+  }, function(error){
+    Actions.apiError();
   });
 
 

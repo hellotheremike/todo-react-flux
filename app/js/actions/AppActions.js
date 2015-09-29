@@ -10,5 +10,6 @@ module.exports = BuildActions({
     update: [/* todo object */ Object ],
     updateLocally: [/* local todo */ Object, /* server response todo */ Object ],
     updateAll: [],
-    reorder: [/* from */ Number, /* to */ Number]
+    reorder: [/* from */ Number, /* to */ Number],
+    apiError: []
 }, 'todo.');

@@ -11,6 +11,7 @@ var events = BuildEvents({
   Store variables
 ************************************************/
 
+var _error = false;
 var _todosLoaded = false;
 var _todos = [];
 
@@ -55,7 +56,7 @@ Actions.loadTodos.listen(function(todos){
 
 Actions.create.listen(function(todo){
   var text = todo.text.trim();
-  if (text !== '') {
+  if (text !== '' && !_error) {
     _todos.push(todo);
     events.storeChanged();
   }
@@ -81,6 +82,11 @@ Actions.reorder.listen(function(from, to){
     events.storeChanged();
 });
 
+Actions.apiError.listen(function(from, to){
+    _error = true;
+    events.storeChanged();
+});
+
 /************************************************
   Store functions
 ************************************************/
@@ -89,7 +95,9 @@ module.exports = {
   todosLoaded: function() {
       return _todosLoaded;
   },
-
+  error: function(){
+    return _error;
+  },
   getAll: function() {
     return _todos;
   }
