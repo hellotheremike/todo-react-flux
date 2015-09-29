@@ -1,7 +1,8 @@
 from flask import jsonify, request, session, make_response
 from flask.ext.restful import  wraps
+from .generate_guid import generate_guid
 import settings
-import generate_guid
+
 
 
 # Check if API-key is valid
