@@ -14,7 +14,7 @@ var List = React.createClass({
 
   render: function(){
     if (Object.keys(this.props.allTodos).length < 1) {
-      return null;
+      return <p className="alert-box">Go ahead and create a new task.</p>;
     }
 
     return (

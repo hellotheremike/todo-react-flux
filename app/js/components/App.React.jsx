@@ -19,10 +19,12 @@ var App = React.createClass({
   },
 
   render: function(){
-    var listElement = 'Loading todos';
+    var listElement = <p className="alert-box">Fetching ToDo's...</p>;
 
     if(this.state.loaded){
       listElement = < List allTodos={this.state.allTodos} />
+    } else if (this.state.error) {
+      listElement = <p className="alert-box error">Opss... We had problems authorizing your accesstoken.</p>;
     }
 
     return (
@@ -42,6 +44,7 @@ var App = React.createClass({
     return {
       allTodos: Store.getAll(),
       loaded: Store.todosLoaded(),
+      error: Store.error()
     };
   }
 });
